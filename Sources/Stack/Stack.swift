@@ -27,10 +27,10 @@ public class Stack<T: Equatable> {
     catch {
       throw error
     }
-    return value
+    return value!
   }
 
-  public func peek() -> T {
+  public func peek() -> T? {
     return self.list[0]
   }
 
