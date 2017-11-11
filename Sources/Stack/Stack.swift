@@ -1,3 +1,7 @@
+enum StackError: Error {
+case stackEmpty
+}
+
 import LinkedList
 
 public class Stack<T: Equatable> {
@@ -19,7 +23,7 @@ public class Stack<T: Equatable> {
   }
 
   public func pop() throws -> T {
-    let value = self.list[0]
+    if let value = self.list[0] {
     do {
       try self.list.remove(atIndex: 0)
       self.stackSize -= 1
@@ -27,8 +31,12 @@ public class Stack<T: Equatable> {
     catch {
       throw error
     }
-    return value!
+    return value
   }
+  else {
+    throw StackError.stackEmpty
+  }
+}
 
   public func peek() -> T? {
     return self.list[0]
